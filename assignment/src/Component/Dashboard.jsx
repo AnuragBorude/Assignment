@@ -52,18 +52,12 @@ function Dashboard()
     },[])
     const loaduser=async () =>{
         var DATA= await axios.get(`http://127.0.0.1:8000/dashboard/`)
-        
-        // console.log("closure",DATA.data);
-        // var rrrr=DATA.data.close
-        // console.log("ccccccccccccccccllllllllllllllllllloooooooooooooooooosssssssssssssssssssssseeeeeeeeeeeeeeeeeeee",rrrr)
-        // var av=(Closure.data.records);
-        // setClosurelen(av)
- 
 
-        setTotallen(DATA.data.Total)
-        setClosedlen(DATA.data.close)
-        setRunninglen(DATA.data.Running)
-        setCancellen(DATA.data.cancel)
+        console.log(DATA)
+        setTotallen(DATA.data.Card[0].Total)
+        setClosedlen(DATA.data.Card[1].IndividualCount)
+        setRunninglen(DATA.data.Card[3].IndividualCount)
+        setCancellen(DATA.data.Card[0].IndividualCount)
         setClosurelen(DATA.data.Closure)
 
         
