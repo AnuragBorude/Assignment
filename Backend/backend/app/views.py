@@ -77,9 +77,7 @@ def serialize_Graphdata(rows):
         })
     return serialized_data
 
-
-
-    
+  
 def total(request):
  
     # CARD
@@ -91,43 +89,15 @@ def total(request):
     closur = ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status=	'Running' AND  EndDate <='"+str(datee)+"'")
 
 
-    # GRAPH
-
-    
+    # GRAPH   
     rows = execute_Graphsql_query()
     serialized_Graphdata = serialize_Graphdata(rows) 
-
-
-    # Strategy
-    strategyTotal=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Dept='Strategy'"  )
-    strategyClosed=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed' AND Dept='Strategy'" )
-    strategyPercent=int(len(strategyClosed)/len(strategyTotal)*100)
     
-    # Finance
-    FinanceTotal=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Dept='Finace'"  )
-    FinanceClosed=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed' AND Dept='Finace'" )
-    FinancePercent=int(len(FinanceClosed)/len(FinanceTotal)*100)
 
-    # Quality
-    QualityTotal=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Dept='Quality'"  )
-    QualityClosed=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed' AND Dept='Quality'" )
-    QualityPercent=int(len(QualityClosed)/len(QualityTotal)*100)
-    
-    # Maintainence
-    MaintainenceTotal=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Dept='Maintainence'"  )
-    MaintainenceClosed=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed' AND Dept='Maintainence'" )
-    MaintainencePercent=int(len(MaintainenceClosed)/len(MaintainenceTotal)*100)
-
-
-    
     obj = { "Closure" : str(len(closur)),
     "Card":serialized_Carddata,
     "Graph":serialized_Graphdata,
-    "Strper" : strategyPercent,
-    "Finper" : FinancePercent,
-    "Qltper" : QualityPercent,
-    "Manper" : MaintainencePercent,
-      }
+    }
     # return HttpResponse(str(len(aaa.Result)))
 
     return JsonResponse(obj,safe=False)

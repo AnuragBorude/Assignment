@@ -62,21 +62,21 @@ function Dashboard()
 
         setFINTOTAL(DATA.data.Graph[0].TotalCount)
         setFINCLOSE(DATA.data.Graph[0].ClosedCount)
-        setFINPER(DATA.data.Finper)
+        setFINPER(parseInt(DATA.data.Graph[0].ClosedCount / DATA.data.Graph[0].TotalCount *100))
 
         setMANTOTAL(DATA.data.Graph[1].TotalCount)
         setMANCLOSE(DATA.data.Graph[1].ClosedCount)
-        setMANPER(DATA.data.Manper)
+        setMANPER(parseInt(DATA.data.Graph[1].ClosedCount / DATA.data.Graph[1].TotalCount *100))
 
         setQLTTOTAL(DATA.data.Graph[2].TotalCount)
         setQLTCLOSE(DATA.data.Graph[2].ClosedCount)
-        setQLTPER(DATA.data.Qltper)
+        setQLTPER(parseInt(DATA.data.Graph[2].ClosedCount / DATA.data.Graph[2].TotalCount *100))
 
         
         
         setSTRTOTAL(DATA.data.Graph[3].TotalCount)
         setSTRCLOSE(DATA.data.Graph[3].ClosedCount)
-        setSTRPER(DATA.data.Strper)
+        setSTRPER(parseInt(DATA.data.Graph[3].ClosedCount / DATA.data.Graph[3].TotalCount *100))
      
     }
     const redirect=() =>{
