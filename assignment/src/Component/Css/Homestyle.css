@@ -1,0 +1,196 @@
+.main{
+    background-image: linear-gradient(to right ,#044E92,#0473DA);
+    height:470px;
+    width: 100%;
+    border-radius: 0px 0px 0px 100px;
+    text-align: center;
+    padding: 0px;
+
+}
+
+.circle{
+    height: 650px;
+    width: 650px;
+    border-radius: 100%;
+    background-color: #1276D1;
+    float: left;
+    margin-left: 580px;
+    margin-top: -220px;
+    z-index: 1111;
+    text-align: center;
+}
+.logo{
+    height: 200px;
+    width: 400px;
+    z-index: 99999;
+    /* background-color: #044E92; */
+    float: left;
+    margin-top: -350px;
+    margin-left: 530px;
+}
+.logo img{
+    color: white;
+    width: 90px;
+    height: 90px;
+}
+.logo h6{
+    color: white;
+    font-weight: 300;
+    margin-top: 25px;
+    font-size: 20px;
+
+
+}
+
+.loginbox{
+    min-height: 400px;
+    max-height: 445px;
+    width: 400px;
+    background-color: white;
+    border-radius: 20px;
+    float: left;
+    margin-top: -200px;
+    margin-left: 540px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.loginbox h4{
+   
+    text-align: center;
+    
+}
+.loginbox p{
+    font-size: 14px;
+    color: red;
+}
+.p1{
+    font-size: 14px;
+    display: inline;
+}
+
+.loginbox a{
+   
+    font-size: 14px;
+    display: inline;
+    float: right;
+}
+.label1{
+   
+   margin-top: 30px;
+   text-align: left;
+    
+}
+.loginbox button{
+   
+    background-color:  #035FB2;
+    margin-top: 30px;
+    border-radius: 80px;
+    margin-left: 80px;
+
+    
+}
+.in{
+    color: red;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 50px;
+}
+.password-container{
+    height: 30px;
+    position: relative;
+  }
+  .password-container input[type="password"],
+  .password-container input[type="text"]{
+    width: 100%;
+    padding: 12px 36px 12px 12px;
+    box-sizing: border-box;
+  }
+  .eye{
+    position: absolute;
+    top: 28%;
+    right: 4%;
+    cursor: pointer;
+    color: lightgray;
+  }
+
+  
+
+@media screen and (max-width:600px) {
+    .main{
+        background-image: linear-gradient(to right ,#044E92,#0473DA);
+        height:350px;
+        width: 100%;
+        border-radius: 0px 0px 0px 100px;
+        text-align: center;
+        padding: 0px;
+        overflow: hidden;
+       
+       
+    
+    }
+    .logo img{
+        color: white;
+        width: 90px;
+        height: 90px;
+        margin-left: 0px;
+    }
+    .circle{
+        height: 550px;
+        width: 550px;
+        border-radius: 100%;
+        background-color: #1276D1;
+        float: left;
+        margin-left: 100px;
+        margin-top: -250px;
+        z-index: 1111;
+        text-align: center;
+    }
+    .logo{
+        height: 300px;
+        width: 400px;
+        z-index: 99999;
+        float: left;
+        margin-top: -200px;
+        margin-left: 0px;
+    }
+    .logo h6{
+        color: white;
+        font-weight: 300;
+        margin-top: 30px;
+        font-size: 20px;
+    
+    }
+    .loginbox{
+        height: 425px;
+        width: 400px;
+        border-radius: 20px;
+        float: left;
+        margin-top: 10px;
+        margin-left: 2px;
+        box-shadow: none;
+    
+    }
+    .loginbox h4{
+   
+        text-align: left;
+        
+    }
+    .loginbox button{
+   
+        background-color:  #035FB2;
+        /* margin-top: 90px; */
+        border-radius: 80px;
+        width: 100%;
+        margin-left: 0px;
+    }
+    .in{
+        color: red;
+        font-size: 15px;
+        margin-left: 90px;
+        /* margin-top: -60px; */
+    }
+    .Invaliddd{
+        text-align: center;
+    }
+    
+}
