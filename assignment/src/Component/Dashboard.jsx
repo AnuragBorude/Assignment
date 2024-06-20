@@ -55,29 +55,29 @@ function Dashboard()
 
         console.log(DATA)
         setTotallen(DATA.data.Card[0].Total)
+        setCancellen(DATA.data.Card[0].IndividualCount)
         setClosedlen(DATA.data.Card[1].IndividualCount)
         setRunninglen(DATA.data.Card[3].IndividualCount)
-        setCancellen(DATA.data.Card[0].IndividualCount)
         setClosurelen(DATA.data.Closure)
 
-        
-        setSTRTOTAL(DATA.data.StrTot)
-        setSTRCLOSE(DATA.data.StrClo)
-        setSTRPER(DATA.data.Strper)
-
-        setFINTOTAL(DATA.data.FinTot)
-        setFINCLOSE(DATA.data.FinClo)
+        setFINTOTAL(DATA.data.Graph[0].TotalCount)
+        setFINCLOSE(DATA.data.Graph[0].ClosedCount)
         setFINPER(DATA.data.Finper)
 
-        setQLTTOTAL(DATA.data.QuaTot)
-        setQLTCLOSE(DATA.data.QuaClo)
+        setMANTOTAL(DATA.data.Graph[1].TotalCount)
+        setMANCLOSE(DATA.data.Graph[1].ClosedCount)
+        setMANPER(DATA.data.Manper)
+
+        setQLTTOTAL(DATA.data.Graph[2].TotalCount)
+        setQLTCLOSE(DATA.data.Graph[2].ClosedCount)
         setQLTPER(DATA.data.Qltper)
 
-        setMANTOTAL(DATA.data.MainTot)
-        setMANCLOSE(DATA.data.MainClo)
-        setMANPER(DATA.data.Manper)
-  
-       
+        
+        
+        setSTRTOTAL(DATA.data.Graph[3].TotalCount)
+        setSTRCLOSE(DATA.data.Graph[3].ClosedCount)
+        setSTRPER(DATA.data.Strper)
+     
     }
     const redirect=() =>{
         localStorage.setItem("login","");
