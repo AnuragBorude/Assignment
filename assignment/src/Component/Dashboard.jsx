@@ -48,15 +48,8 @@ function Dashboard()
     useEffect(()=>
     {
             loaduser();
-            loaduser11()
-    },[])
-
-
-    const loaduser11=async () =>{
-        var DATA= await axios.get(`http://127.0.0.1:8000/dashboard11/`)
     
-       console.log(DATA)
-    }
+    },[])
     const loaduser=async () =>{
         var DATA= await axios.get(`http://127.0.0.1:8000/dashboard/`)
         

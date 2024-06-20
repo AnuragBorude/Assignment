@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from app.views import total ,login , total11
+from app.views import total ,login 
 from app.views import ProjectRUD
 
 
@@ -26,6 +26,5 @@ urlpatterns = [
     # path('Data/',ProjectLC.as_view(), name="data"),
     path('ProjectUpdate/<int:pk>/',ProjectRUD.as_view()),
     path('dashboard/',total),
-    path('dashboard11/',total11),
     path('LoginCheck/',login),
 ]

@@ -1,4 +1,8 @@
 from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+from django.db import connection
+import json
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render
 from .models import LoginModel, ProjectModel
 from .serializers import ProjectSerializer ,LoginSerializer
@@ -39,22 +43,41 @@ def login(req):
         return JsonResponse({"status":"false"},safe=False)
 
 
+def execute_Cardsql_query():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT Status,(SELECT COUNT(*) FROM app_projectmodel ) AS Total,COUNT(*) AS IndividualCount FROM app_projectmodel GROUP BY  Status;")
+        rows = cursor.fetchall()
+        return rows
 
 
-def total(req):
+def serialize_Carddata(rows):
+    serialized_data = []
+    for row in rows:
+        serialized_data.append({
+            'Status': row[0],
+            'Total': row[1],
+            'IndividualCount': row[2]
+        })
+    return serialized_data
+
+
+
+    
+def total(request):
+ 
     # CARD
-    # aaa= ProjectModel.objects.raw("SELECT COUNT(id),Status FROM app_projectmodel GROUP BY Status")
-    # print(aaa)
-
-    Total = ProjectModel.objects.raw("SELECT * FROM app_projectmodel")
-    Cls = ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed'")
-    Run = ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Running'")
-    Cancel = ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status=	'Cancelled'")
+    # Running Closed Cancelled
+    rows = execute_Cardsql_query()
+    serialized_Carddata = serialize_Carddata(rows)    
+  
     datee=date.today() 
     closur = ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status=	'Running' AND  EndDate <='"+str(datee)+"'")
+
+
     # GRAPH
-   
-    print(len(Cls))
+
+
+
     # Strategy
     strategyTotal=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Dept='Strategy'"  )
     strategyClosed=ProjectModel.objects.raw("SELECT * FROM app_projectmodel WHERE Status='Closed' AND Dept='Strategy'" )
@@ -76,41 +99,29 @@ def total(req):
     MaintainencePercent=int(len(MaintainenceClosed)/len(MaintainenceTotal)*100)
 
 
+    
     obj = { "Closure" : str(len(closur)),
-    # "aaaa":aaa,
-    "Total" : str(len(Total)),
-    "Running" : str(len(Run)),
-    "close" : str(len(Cls)),
-    "cancel" : str(len(Cancel)),
-    "StrTot" : str(len(strategyTotal)),
-    "StrClo" : str(len(strategyClosed)),
-    "FinTot" : str(len(FinanceTotal)),
-    "FinClo" : str(len(FinanceClosed)),
-    "QuaTot" : str(len(QualityTotal)),
-    "QuaClo" : str(len(QualityClosed)),
-    "MainTot" : str(len(MaintainenceTotal)),
-    "MainClo" : str(len(MaintainenceClosed)),
+    "Card":serialized_Carddata,
+    # "Total" : str(len(Total)),
+    # "Running" : str(len(Run)),
+    # "close" : str(len(Cls)),
+    # "cancel" : str(len(Cancel)),
+    # "StrTot" : str(len(strategyTotal)),
+    # "StrClo" : str(len(strategyClosed)),
+    # "FinTot" : str(len(FinanceTotal)),
+    # "FinClo" : str(len(FinanceClosed)),
+    # "QuaTot" : str(len(QualityTotal)),
+    # "QuaClo" : str(len(QualityClosed)),
+    # "MainTot" : str(len(MaintainenceTotal)),
+    # "MainClo" : str(len(MaintainenceClosed)),
     "Strper" : strategyPercent,
     "Finper" : FinancePercent,
     "Qltper" : QualityPercent,
     "Manper" : MaintainencePercent,
       }
     # return HttpResponse(str(len(aaa.Result)))
+
     return JsonResponse(obj,safe=False)
-
-
-
-def total11(req):
-    # CARD
-    aaa= ProjectModel.objects.raw("SELECT COUNT(id),Status FROM app_projectmodel GROUP BY Status")
-    print(str(aaa))
-    
-    obj = { 
-    "aaaa":aaa,
-  
-      }
-    # return HttpResponse(str(len(aaa.Result)))
-    return JsonResponse(obj)
 
 
 
