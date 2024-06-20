@@ -60,6 +60,23 @@ def serialize_Carddata(rows):
         })
     return serialized_data
 
+def execute_Graphsql_query():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT dept, COUNT(*) AS TOTALCOUNT, COUNT(CASE WHEN status = 'Closed' THEN 1 END) AS CLOSEDCOUNT FROM app_projectmodel GROUP BY dept;")
+        rows = cursor.fetchall()
+        return rows
+
+
+def serialize_Graphdata(rows):
+    serialized_data = []
+    for row in rows:
+        serialized_data.append({
+            'Dept': row[0],
+            'TotalCount': row[1],
+            'ClosedCount': row[2]
+        })
+    return serialized_data
+
 
 
     
@@ -76,6 +93,9 @@ def total(request):
 
     # GRAPH
 
+    
+    rows = execute_Graphsql_query()
+    serialized_Graphdata = serialize_Graphdata(rows) 
 
 
     # Strategy
@@ -102,18 +122,7 @@ def total(request):
     
     obj = { "Closure" : str(len(closur)),
     "Card":serialized_Carddata,
-    # "Total" : str(len(Total)),
-    # "Running" : str(len(Run)),
-    # "close" : str(len(Cls)),
-    # "cancel" : str(len(Cancel)),
-    # "StrTot" : str(len(strategyTotal)),
-    # "StrClo" : str(len(strategyClosed)),
-    # "FinTot" : str(len(FinanceTotal)),
-    # "FinClo" : str(len(FinanceClosed)),
-    # "QuaTot" : str(len(QualityTotal)),
-    # "QuaClo" : str(len(QualityClosed)),
-    # "MainTot" : str(len(MaintainenceTotal)),
-    # "MainClo" : str(len(MaintainenceClosed)),
+    "Graph":serialized_Graphdata,
     "Strper" : strategyPercent,
     "Finper" : FinancePercent,
     "Qltper" : QualityPercent,
