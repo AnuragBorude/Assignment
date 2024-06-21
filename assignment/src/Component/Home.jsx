@@ -43,10 +43,12 @@ function Home(){
     // Foem Submit
 
     const submit= (event) =>{
-        event.preventDefault()
         seterrors(validation(values))
+        event.preventDefault()
+        
         // const em=values.Email
         // const pa=values.Password
+        if(values.Email && values.Password){
         var checklogin = axios.post(`http://127.0.0.1:8000/LoginCheck/`,values)
         .then(function(res){
             // console.log(res.data);
@@ -66,6 +68,7 @@ function Home(){
             }
     
         })
+    }
     }
  
     const validation=(values)=>{

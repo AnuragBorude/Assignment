@@ -36,6 +36,10 @@ function ProductAdd(){
            
             EndDateerror:'',
         })
+        const [error3,seterror3]=useState({
+           
+            compareDateerror:'',
+        })
        
         const changehandel =(e)=>{
             setState({
@@ -79,7 +83,7 @@ function ProductAdd(){
         let error=true;
         if(state.ProjectName == ''){
             error=false;
-            alert("redc")
+            // alert("redc")
             seterror({
                 ProjectNameerror:"Project Theme Is Required"
             })
@@ -102,7 +106,7 @@ function ProductAdd(){
             })
         }
 
-        if(state.EndDate == ''){
+        if(state.EndDate == '' ){
             error=false;
             seterror2({
                 EndDateerror:"End Date Is Required"
@@ -113,7 +117,22 @@ function ProductAdd(){
                 EndDateerror:"",
             })
         }
-        // alert(error)
+        const date1 = new Date(state.EndDate);
+        const date2 = new Date(state.StartDate);
+        if(date1 <= date2){
+            error=false;
+            seterror3({
+                compareDateerror:"End Date Must Be Greater than Start Date"
+            })
+        }
+        else{
+            seterror3({
+                compareDateerror:"",
+            })
+        }
+        // alert(date1)
+        // alert(date2)
+        // alert(error3.compareDateerror)
         return error;
     }
     
@@ -257,6 +276,9 @@ function ProductAdd(){
                                         <input onChange={changehandel} value={state.EndDate}  name="EndDate" type="date" className="form-control" style={{height:"45px",borderRadius:"8px",padding:"10px",marginTop:"0px"}}/>
                                         {error2.EndDateerror ?<div style={{color:"Red"}}>
                                         {error2.EndDateerror}
+                                        </div>:""}
+                                        {error3.compareDateerror ?<div style={{color:"Red"}}>
+                                        {error3.compareDateerror}
                                         </div>:""}
                                         {/* <label className="text-danger mt-1">End Date required</label> */}
                                                                  
