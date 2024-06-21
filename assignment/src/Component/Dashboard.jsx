@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {NavLink} from "react-router-dom";
 import Chart from "react-apexcharts"
 import axios from "axios"
 import "./Css/Dashboardstyle.css";
 import { useNavigate } from 'react-router-dom';
 
-
 function Dashboard()
 {
     var nav=useNavigate()
     const [swiperRef, setSwiperRef] = useState(null);
+    
     
     // DATE
     // const current = new Date();
@@ -42,7 +42,11 @@ function Dashboard()
     const[MANCLOSE, setMANCLOSE]=useState()
     const[MANPER, setMANPER]=useState()
 
-
+    var a=parseInt(STRTOTAL)
+    var b=parseInt(FINTOTAL)
+    var c=parseInt(QLTTOTAL)
+    var d=parseInt(MANTOTAL)
+    // Piechart
     
     // Load Data
     useEffect(()=>
@@ -90,7 +94,7 @@ function Dashboard()
    var man=MANPER+"% MAN"
     return(
         <>
-        <section>
+        <section >
              <div className="section">
                 <div className="side shadow m-0 ">
                     <div className="dashboar">
@@ -179,13 +183,14 @@ function Dashboard()
         
                     <br></br>
                    
-                    <div className="container-fluid ">
+                    <div className="container-fluid " >
                         <div className="row">
-                            <div className="col-12 mt-3 ">
+                            <div className="col-lg-6 col-sm-12">
+                            <div className="col-12 mt-3 " >
                                 <h4 className="depatment">Department Wise - Total vs Closed</h4>
                             </div>
-
-                            <div className="col-lg-5 col-12 mt-1 ">
+                           
+                            <div className="col-lg-12 col-12 mt-1 " style={{float:"left"}}>
                                 <div className=" graph">
                                     <Chart type="bar" height="400px" width="100%"
                                      series={
@@ -227,7 +232,35 @@ function Dashboard()
                                      }}
                                      
                                     ></Chart>
+                                    {/* <Chart type="piechart" height="100px" width></Chart> */}
+
                                 </div> 
+                                
+                            </div>
+                            </div>
+
+                            <div className="col-lg-6 col-sm-12">
+                            <div className="col-12 mt-3 " >
+                                <h4 className="department2">Department Wise - Total </h4>
+                            </div>
+                           
+                            <div className="col-lg-12 col-12 mt-1 " style={{float:"left"}}>
+                                <div className=" pie" style={{}}>
+                                      <Chart 
+                                      type="pie"
+                                      width="100%"
+                                      height="400px"
+                                      
+                                      series={[a,b,c,d]}
+                                      options={{
+                                        labels:['Strategy','Finance','Quality','Maintenance']
+                                      }}
+                                      >
+
+                                      </Chart>
+                                </div> 
+                                
+                            </div>
                             </div>
                         </div>    
                     </div> 
@@ -238,4 +271,3 @@ function Dashboard()
     )
 }
  export default Dashboard
- 
