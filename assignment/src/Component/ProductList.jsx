@@ -63,7 +63,6 @@ function ProductList(){
        await axios.get(`http://127.0.0.1:8000/ProjectInfo/?ordering=${val}`)
         .then((response) =>{
             setdata(response.data)
-            // Data is coming but it is not sorted
             
         })
         .catch((error)=> console.log(error))
@@ -76,7 +75,6 @@ function ProductList(){
        await axios.get(`http://127.0.0.1:8000/ProjectInfo/?search=${val}`)
         .then((response) =>{
             setdata(response.data)
-            // Data is coming but it is not sorted
             
         })
         .catch((error)=> console.log(error))
@@ -84,41 +82,26 @@ function ProductList(){
 
     // UPDATE
     // console.log(status)
-    const startstatus=(e)=>{
-        
+    const updatestatus=(e)=>{
+        var expression=e.target.name
+        switch(expression) {
+            case 'status':
+                var v=status
+              break;
+            case 'close':
+                var v=close
+              break;
+            case 'cancel':
+                var v=cancel
+              break;
+            default:
+                var v="error"
+          }
+
         var val=e.target.value
-        axios.patch(`http://127.0.0.1:8000/ProjectUpdate/${val}/`,status)
-        .then(responce=>{
-            
-        })
-        .catch(error=>{
-        })
-        window.location.reload(false)
-    }
-
-    const closestatus=(e)=>{
+        axios.patch(`http://127.0.0.1:8000/ProjectUpdate/${val}/`,v)
         
-        var val=e.target.value
-        axios.patch(`http://127.0.0.1:8000/ProjectUpdate/${val}/`,close)
-        .then(responce=>{
-        })
-        .catch(error=>{
-        })
         window.location.reload(false)
-
-    }
-
-    const cancelstatus=(e)=>{
-        
-        var val=e.target.value
-        axios.patch(`http://127.0.0.1:8000/ProjectUpdate/${val}/`,cancel)
-        
-        .then(responce=>{
-        })
-        .catch(error=>{
-        })
-        window.location.reload(false)
-
     }
     
     const redirect=() =>{
@@ -227,9 +210,9 @@ function ProductList(){
                                                                 <td style={{color:"#2D4E6C",fontWeight:"bold",fontSize:"16px"}}>{item.Status}</td>
                                                                 <td>
                                                                     <div className="row  pt-0 ">
-                                                                        <div  className="col-4 p-0 text-right"><button onClick={startstatus} value={item.id} className="btn btn-primary pl-4 pr-4 " style={{borderRadius:"20px",background:"#025AAB"}}>Start</button></div>
-                                                                        <div  className="col-4  p-0 text-center"><button onClick={closestatus} value={item.id} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>close</button></div>
-                                                                        <div  className="col-4  p-0 text-left"><button onClick={cancelstatus} value={item.id} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>cancel</button></div>
+                                                                        <div  className="col-4 p-0 text-right"><button onClick={updatestatus} value={item.id} name={"status"}className="btn btn-primary pl-4 pr-4 " style={{borderRadius:"20px",background:"#025AAB"}}>Start</button></div>
+                                                                        <div  className="col-4  p-0 text-center"><button onClick={updatestatus} value={item.id} name={"close"} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>close</button></div>
+                                                                        <div  className="col-4  p-0 text-left"><button onClick={updatestatus} value={item.id} name={"cancel"} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>cancel</button></div>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -271,9 +254,9 @@ function ProductList(){
                                                                                     </div>
                                                                                         <div className="col-12 mt-1">
                                                                                         <div className="row  pt-0 ">
-                                                                                            <div  className="col-4 p-0 text-right"><button onClick={startstatus} value={item.id} className="btn btn-primary pl-4 pr-4 " style={{borderRadius:"20px",background:"#025AAB"}}>Start</button></div>
-                                                                                            <div  className="col-4  p-0 text-center"><button onClick={closestatus} value={item.id} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>close</button></div>
-                                                                                            <div  className="col-4  p-0 text-left"><button onClick={cancelstatus} value={item.id} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>cancel</button></div>
+                                                                                        <div  className="col-4 p-0 text-right"><button onClick={updatestatus} value={item.id} name={"status"}className="btn btn-primary pl-4 pr-4 " style={{borderRadius:"20px",background:"#025AAB"}}>Start</button></div>
+                                                                        <div  className="col-4  p-0 text-center"><button onClick={updatestatus} value={item.id} name={"close"} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>close</button></div>
+                                                                        <div  className="col-4  p-0 text-left"><button onClick={updatestatus} value={item.id} name={"cancel"} className="btn btn-outline-primary  pl-4 pr-4" style={{borderRadius:"20px"}}>cancel</button></div>
                                                                                         </div>
                                                                                     </div>
                                                                                    
